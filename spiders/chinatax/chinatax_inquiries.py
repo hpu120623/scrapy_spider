@@ -46,17 +46,8 @@ class ChinataxInquiriesSpider(Spider):
                 task['captcha_data']['checknum'] = captcha_text
 
             yield FormRequest(task['captcha_url'], formdata=task['captcha_data'], callback=self.parse_data, meta={'task': task, 'yzm': captcha_text})
-        # elif self.test_code == 530000:
-        #     with open('captcha.jpg', 'wb') as f:
-        #         f.write(response.body)
-        #
-        #     captcha_text = BaiDuOCR().parse_captcha('captcha.jpg')
-        #     check_captcha = task['captcha_url'].format(captcha_code=captcha_text)
-        #     yield Request(check_captcha, callback=self.parse_data, meta={'task': task})
         else:
-            now_time = response.meta.get('now_time', '')
-            captcha_url = task['captcha_url'].format(time=now_time) if now_time else task['captcha_url']
-            yield Request(captcha_url, callback=self.parse_data, meta={'task': task})
+            yield Request(task['captcha_url'], callback=self.parse_data, meta={'task': task})
 
     def parse_data(self, response):
         self.logger.info(f'Parse Data: {response.url}')
@@ -68,8 +59,6 @@ class ChinataxInquiriesSpider(Spider):
             if response.meta.get('yzm'):
                 task['data']['yzm'] = response.meta['yzm']
             yield FormRequest(task['detail_url'], formdata=task['data'], callback=self.parse_detail, meta={'task':task, 'detail': 1})
-        # elif self.test_code == 530000:
-        #     yield Request(task['detail_url'], callback=self.parse_detail, meta={'task': task, 'detail': 1})
         else:
             with open("captcha.jpg",'wb') as f:
                 f.write(response.body)
@@ -77,7 +66,6 @@ class ChinataxInquiriesSpider(Spider):
             if self.test_code == 410000 or self.test_code == 450000 or self.test_code == 460000:
                 captcha_text = OtherOCR().parse_captcha('captcha.jpg')
             else:
-                # captcha_text = OtherOCR().parse_captcha('captcha.jpg')
                 captcha_text = BaiDuOCR().parse_captcha('captcha.jpg')
             print(f'captcha_text: {captcha_text}')
 
@@ -112,9 +100,7 @@ class ChinataxInquiriesSpider(Spider):
                 elif self.test_code == 370000:
                     result = response.css('table#tb tr')[2:]
                     first_text = result[0].css('::text').extract_first()
-                    if '未查询到' in first_text:
-                        count = 0
-                    else:
+                    if '未查询到' not in first_text:
                         count = len(result)
                 elif self.test_code == 460000:
                     count = len(response.css('.list_table tr'))
