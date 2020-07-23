@@ -4,7 +4,7 @@ from utils.functools import str_base64
 
 area_dict = {
     220000: {
-        'area': '吉林', # 1, 常规
+        'area': '吉林', # 1
         'request_url': 'https://etax.jilin.chinatax.gov.cn:10812/sword?ctrl=LnGdsPortalCtrl_gzcxPageInit&type=gzcx&gzcxurl=https%3A%2F%2Fetax.jilin.chinatax.gov.cn%3A10812%2Fsword%3Fctrl%3DLnGdsPortalCtrl_dlqtz%26rk%3Dgzfw&gnlj=/sword?ctrl=SB708CxqsxxCtrl_initView&gnbt=',
         'captcha_url': 'https://etax.jilin.chinatax.gov.cn:10812/download.sword?ctrl=CheckcodeCtrl_getCheckcode',
         'detail_url': 'https://etax.jilin.chinatax.gov.cn:10812/ajax.sword?ctrl=SB708CxqsxxCtrl_queryQsggList',
@@ -21,7 +21,7 @@ area_dict = {
         }
     },
     230000: {
-        'area': '黑龙江', # 1，特殊
+        'area': '黑龙江', # 1，不需要验证码
         'request_url': 'https://etax.heilongjiang.chinatax.gov.cn/nologin/xxcx/qscx.jsp',
         'detail_url': 'https://etax.heilongjiang.chinatax.gov.cn/nologin/xxcx/qscx_jg.jsp',
         'method': 'post',
@@ -55,7 +55,7 @@ area_dict = {
         'type': 'json'
     },
     340000: {
-        'area': '安徽',   # 1，常规, 接口查不到数据
+        'area': '安徽',   # 1，常规
         'request_url': 'https://etax.anhui.chinatax.gov.cn/qjskggcx?0.3136323235884164',
         'captcha_url': 'https://etax.anhui.chinatax.gov.cn/qsgg/imgCode',
         'detail_url': 'https://etax.anhui.chinatax.gov.cn/qsgg/getggxx',
@@ -73,14 +73,14 @@ area_dict = {
         }
     },
     360000: {
-        'area': '江西', # 0，常规，接口返回查询失败
+        'area': '江西', # 0 ，常规，接口返回查询失败
         'request_url': 'https://etax.jiangxi.chinatax.gov.cn/etax/jsp/portal/sscx/pub_szqsggcx.jsp',
         'captcha_url': 'https://etax.jiangxi.chinatax.gov.cn/etax/jsp/common/loginCode.jsp',
         'detail_url': 'https://etax.jiangxi.chinatax.gov.cn/etax/sscxPublicQuery/szqsggcx',
         'method': 'post',
         'type': 'json',
         'data': {
-            'nsrsbm': '360111158263177',
+            'nsrsbm': '91360724576130852C',
             'nsrmc': '',
             'zgswjgmc': '',
             'yzm': ''
@@ -120,16 +120,10 @@ area_dict = {
     },
     420000: {
         'area': '湖北',   # 1, 特殊
-        'request_url': 'https://etax.hubei.chinatax.gov.cn/webroot/gzcxAction.do?method=yhsYZM&codename=verifycode_QSGG',
-        'captcha_url': 'https://etax.hubei.chinatax.gov.cn/webroot/gzcxAction.do',
+        'request_url': 'https://etax.hubei.chinatax.gov.cn/portal/iframe.c?dm=undefined&menu=GZFW_170000303&title=%E6%AC%A0%E7%A8%8E%E6%9F%A5%E8%AF%A2&goUrl=/webroot/nsfw/fwdt/gzcx/qsgg.jsp',
         'detail_url': 'https://etax.hubei.chinatax.gov.cn/webroot/gzcxAction.do?method=qsggxxqg',
         'method': 'post',
         'type': 'json',
-        'captcha_data': {
-            'method': 'checkYZM',
-            'yzm': '',
-            'verifycode': 'verifycode_QSGG'
-        },
         'data': {
             'page': '1',
             'limit': '10',
@@ -140,7 +134,7 @@ area_dict = {
         }
     },
     440000: {
-        'area': '广东',   # 1, 特殊
+        'area': '广东',   # 1, 验证码识别率低
         'request_url': 'https://www.etax-gd.gov.cn/web-tycx/sscx/gzcx/qsqycx/qsqycx.jsp?cdId=cdid-dlqcd-qsqycx&gnDm=gndm-dlqcd-qsqycx&gdslxDm=3',
         'captcha_url': 'https://www.etax-gd.gov.cn/web-tycx/gzrk/builderCaptcha.do',
         'detail_url': 'https://www.etax-gd.gov.cn/web-tycx/gzrk/tycxGzrkQuery.do?t=1592388185670&bw=',
@@ -176,7 +170,7 @@ area_dict = {
         'type': 'html',
         'data': {
             'name': '',
-            'id': '460100056385907',
+            'id': '460100567996785',
             'pageNo': '1',
             'captcha': ''
         }
@@ -193,7 +187,7 @@ area_dict = {
         }
     },
     520000: {
-        'area': '贵州',   # 1, 特殊
+        'area': '贵州',   # 1, 验证码识别率低
         'request_url': 'https://etax.guizhou.chinatax.gov.cn/tycx-cjpt-web/view/sscx/gzcx/qsqycx/qsqycx.jsp',
         'captcha_url': 'https://etax.guizhou.chinatax.gov.cn/tycx-cjpt-web/cxptGz/builderCaptcha.do',
         'detail_url': 'https://etax.guizhou.chinatax.gov.cn/tycx-cjpt-web/cxptGz/tycxGzcxGzrkQuery.do?bw=',
@@ -209,17 +203,14 @@ area_dict = {
         'type': 'json'
     },
     620000: {
-        'area': '甘肃',   # 0, 系统故障接口查询失败
-        'request_url': 'https://etax.gansu.chinatax.gov.cn/yhs-web/api/yhsyzm/get',
-        'captcha_url': 'https://etax.gansu.chinatax.gov.cn/yhs-web/api/yhsyzm/check', # post
+        'area': '甘肃',   # 1
+        'request_url': 'https://etax.gansu.chinatax.gov.cn/yhs-web/cxzx/index.html?&code=1111&id=22080405#/qscx',
+        'captcha_url': 'https://etax.gansu.chinatax.gov.cn/yhs-web/api/yhsyzm/get',
         'detail_url': 'https://etax.gansu.chinatax.gov.cn/yhs-web/api/qsgghxx/xxlbcx',
-        'method': 'post',
+        'method': 'get',
         'type': 'json',
-        'captcha_data': {
-            'checknum': ''
-        },
         'data': {
-            'nd': '2018',
+            'nd': '2020',
             'nsrsbh': '91620824MA7396D787',
             'pageIndex': '1',
             'pageSize': '10',
@@ -228,7 +219,7 @@ area_dict = {
         }
     },
     630000: {
-        'area': '青海',   # 返回json
+        'area': '青海',   # 1, 验证码识别率低
         'request_url': 'https://etax.qinghai.chinatax.gov.cn/tycx-cjpt-web/view/sscx/gzcx/qsqycx/qsqycx.jsp?gdslxDm=1&cdId=dlqcd-15&gnDm=dlqcd.gzcx.qsqycx',
         'captcha_url': 'https://etax.qinghai.chinatax.gov.cn/tycx-cjpt-web/cxptGz/builderCaptcha.do',
         'detail_url': 'https://etax.qinghai.chinatax.gov.cn/tycx-cjpt-web/cxptGz/tycxGzcxGzrkQuery.do?gdslxDm=1&bw=',
@@ -238,10 +229,11 @@ area_dict = {
     },
     650000:{
         'area': '新疆',   # 0，系统故障
-        'request_url': 'https://etax.xinjiang.chinatax.gov.cn/yhs-web/api/yhsyzm/get',
-        'captcha_url': 'https://etax.xinjiang.chinatax.gov.cn/yhs-web/api/yhsyzm/check', # post,验证码校验
+        'request_url': 'https://etax.xinjiang.chinatax.gov.cn/yhs-web/cxzx/index.html?id=192&code=qscx#/qscx',
+        'captcha_url': 'https://etax.xinjiang.chinatax.gov.cn/yhs-web/api/yhsyzm/get',
+        # 'captcha_url': 'https://etax.xinjiang.chinatax.gov.cn/yhs-web/api/yhsyzm/check', # post,验证码校验
         'detail_url': 'https://etax.xinjiang.chinatax.gov.cn/yhs-web/api/qsgghxx/xxlbcx',
-        'method': 'post',
+        'method': 'get',
         'type': 'json',
         'captcha_data': {
             'checknum': ''

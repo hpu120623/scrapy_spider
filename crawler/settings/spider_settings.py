@@ -23,9 +23,9 @@ ROBOTSTXT_OBEY = False
 #COOKIES_ENABLED = False
 
 # Override the default request headers:
-REQUEST_HEADERS = {
-    'User-Agent': FakeChromeUA.get_ua()
-}
+# REQUEST_HEADERS = {
+#     'User-Agent': FakeChromeUA.get_ua()
+# }
 
 # Enable or disable spider middlewares
 # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
@@ -36,7 +36,8 @@ REQUEST_HEADERS = {
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
-   # 'crawler.middlewares.inquiries.InquiriesCaptchaMiddleware': 200,
+   'crawler.middlewares.user_agent.UserAgentMiddleware': 200,
+
 }
 
 # Enable or disable extensions

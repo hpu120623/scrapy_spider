@@ -6,7 +6,7 @@ class UserAgentMiddleware(object):
 
     def process_request(self, request, spider):
         request.headers['User-Agent'] = FakeChromeUA.get_ua()
-        request.headers['Accept-Language'] = 'zh-CN,zh;q=0.8,en;q=0.6'
+        # request.headers['Accept-Language'] = 'zh-CN,zh;q=0.8,en;q=0.6'
 
 
 class BaiduUserAgentMiddleware(object):
