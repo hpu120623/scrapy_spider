@@ -13,7 +13,7 @@ class ChinataxPayerStatusSpider(Spider):
     name = 'chinatax_payer_status'
     true = ''
     code = ''
-    test_code = 510000
+    test_code = 360000
 
     headers = {
         # 'Content-Type': 'application/json;charset=UTF-8',
@@ -23,7 +23,7 @@ class ChinataxPayerStatusSpider(Spider):
     def start_requests(self):
         if self.test_code in area_dict:
             task = area_dict[self.test_code]
-            if self.test_code == 370000:
+            if self.test_code == 110000 or self.test_code == 370000:
                 yield FormRequest(task['detail_url'], formdata=task['data'], callback=self.parse_detail,
                                   meta={'task': task})
             elif self.test_code == 650000:
@@ -65,25 +65,23 @@ class ChinataxPayerStatusSpider(Spider):
             captcha_text = OtherOCR().parse_captcha('captcha.jpg')
         else:
             captcha_text = BaiDuOCR().parse_captcha('captcha.jpg')
-        self.logger.info(f'captcha_text: {captcha_text}')
+        # self.logger.info(f'captcha_text: {captcha_text}')
+        print(f'captcha_text: {captcha_text}')
 
         if task['method'] == 'get':
             if self.test_code == 440000 or self.test_code == 630000:
                 task['bw']['taxML']['body']['captcha'] = captcha_text
                 detail_url = task['detail_url'] + quote(str(task['bw']))
                 yield Request(detail_url, callback=self.parse_detail, meta={'task': task, 'detail': 1})
-            elif self.test_code == 130000:
+            elif self.test_code == 130000 or self.test_code == 330200 or self.test_code == 510000:
                 task['data']['yzm'] = captcha_text
+                self.headers['Content-Type'] = 'application/json;charset=UTF-8'
                 yield Request(task['detail_url'], method='POST', body=json.dumps(task['data']), headers=self.headers, callback=self.parse_detail, meta={'task': task})
             elif self.test_code == 330000 or self.test_code == 410000:
                 detail_url = task['detail_url'].format(captcha_code=captcha_text)
                 yield Request(detail_url, callback=self.parse_detail, meta={'task': task})
             elif self.test_code == 620000:
                 task['data']['verifyCode'] = captcha_text
-                self.headers['Content-Type'] = 'application/json;charset=UTF-8'
-                yield Request(task['detail_url'], method='POST', body=json.dumps(task['data']), headers=self.headers, callback=self.parse_detail, meta={'task': task})
-            elif self.test_code == 330200 or self.test_code == 510000:
-                task['data']['yzm'] = captcha_text
                 self.headers['Content-Type'] = 'application/json;charset=UTF-8'
                 yield Request(task['detail_url'], method='POST', body=json.dumps(task['data']), headers=self.headers, callback=self.parse_detail, meta={'task': task})
             elif self.test_code == 370200:
@@ -99,7 +97,7 @@ class ChinataxPayerStatusSpider(Spider):
                 task['data']['token'] = token
             if self.test_code == 310000:
                 task['data']['yzm'] = captcha_text
-                self.headers['Content-Type'] = 'application/json;charset=UTF-8'
+                self.headers['Content-Type'] = 'application/x-www-form-urlencoded'
             elif self.test_code == 360000:
                 task['data']['yzm'] = captcha_text
             elif self.test_code == 430000:
@@ -122,6 +120,7 @@ class ChinataxPayerStatusSpider(Spider):
 
         count = 0
         task = response.meta['task']
+        print(response.text)
         try:
             if task['type'] == 'html':
                 print(response.text)

@@ -144,7 +144,7 @@ area_dict = {
         'request_url': 'http://hunan.chinatax.gov.cn/arrears/20190717003534',
         'captcha_url': 'http://hunan.chinatax.gov.cn/kaptcha/getcode',
         'detail_url': 'http://hunan.chinatax.gov.cn/taxpayerstatesearchdo',
-        'method': 'post',
+        'method': 'get',
         'type': 'json',
         'data': {
             '_csrf': '', # 第一次访问后，源码正则获取
@@ -189,7 +189,7 @@ area_dict = {
         }
     },
     640000: {
-        'area': '宁夏', # 0, 未解决
+        'area': '宁夏', # 0，系统维护
         'request_url': 'https://etax.ningxia.chinatax.gov.cn/sword?ctrl=QsggCtrl_initView',
         'captcha_url': 'https://etax.ningxia.chinatax.gov.cn/download.sword?ctrl=QsggCtrl_getCheckcode',
         'detail_url': 'https://etax.ningxia.chinatax.gov.cn/ajax.sword?rUUID=MkcQcrkydWOMTEKwsde4ejzqTPqlR6MY',

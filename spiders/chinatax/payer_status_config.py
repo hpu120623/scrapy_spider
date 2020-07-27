@@ -8,7 +8,7 @@ area_dict = {
         'area': '北京', # 1, 不需要验证码
         'request_url': 'http://etax.beijing.chinatax.gov.cn/WSBST/qd/fzchgl/jsp/ggnr.jsp',
         'detail_url': 'http://etax.beijing.chinatax.gov.cn/WSBST//FZCHGL_FYServlet?PBk7QutP=',
-        'method': 'post',
+        'method': 'get',
         'type': 'json',
         'data': {
             'qxfj': '00',
@@ -33,22 +33,6 @@ area_dict = {
             'button':  '查     询',
             'struts.token.name': 'token',
             'token': ''
-        }
-    },
-    370000: {
-        'area': '山西', # 1, 不需要验证码
-        'request_url': 'https://etax.shanxi.chinatax.gov.cn/gzfw/nsrzt',
-        'detail_url': 'https://etax.shanxi.chinatax.gov.cn/gzfw/myCommonRemote/commonQuery?sqlid=OnlineSearch_nsrzt',
-        'method': 'post',
-        'type': 'json',
-        'data': {
-            'NSR': '140302051973945',
-            'captcha': '',
-            '_search': 'false',
-            'limit': '50',
-            'page': '1',
-            'sidx': '',
-            'sord': 'asc'
         }
     },
     130000: {
@@ -97,6 +81,32 @@ area_dict = {
         'method': 'get',
         'type': 'json'
     },
+    330200: {
+        'area': '宁波',
+        'request_url': 'https://etax.ningbo.chinatax.gov.cn/yhs-web/cxzx/index.html?&code=nsrztcx&id=842#/nsrztcx',
+        'captcha_url': 'https://etax.ningbo.chinatax.gov.cn/yhs-web/api/yhsyzm/get',
+        'detail_url': 'https://etax.ningbo.chinatax.gov.cn/yhs-web/api/nsrzg/query/nsrztcx',
+        'method': 'get',
+        'type': 'json',
+        'data': {
+            'nsrmc': '宁波杉杉股份有限公司',
+            'shxydm': '91330200704803055M',
+            'yzm': ''
+        }
+    },
+    350200: {
+        'area': '厦门', # 0, 页面打不开
+        'request_url': 'https://etax.xiamen.chinatax.gov.cn:8443/views/nsrgl/nsrzt_query_index.jsp',
+        'detail_url': 'https://etax.xiamen.chinatax.gov.cn:8443/bsfw/nsrgl/queryNsrzt.do',
+        'method': 'post',
+        'type': 'html',
+        'data': {
+            'NSRSBH': '913502001550106684',
+            'NSRMC': '',
+            'YZM': '',
+            'saveKey': ''
+        }
+    },
     360000: {
         'area': '江西',
         'request_url': 'https://etax.jiangxi.chinatax.gov.cn/etax/jsp/portal/sscx/pub_nsrztcx.jsp',
@@ -108,6 +118,30 @@ area_dict = {
             'nsrsbh': '91410322745760055R',
             'yzm': ''
         }
+    },
+    370000: {
+        'area': '山西', # 1, 不需要验证码
+        'request_url': 'https://etax.shanxi.chinatax.gov.cn/gzfw/nsrzt',
+        'detail_url': 'https://etax.shanxi.chinatax.gov.cn/gzfw/myCommonRemote/commonQuery?sqlid=OnlineSearch_nsrzt',
+        'method': 'post',
+        'type': 'json',
+        'data': {
+            'NSR': '140302051973945',
+            'captcha': '',
+            '_search': 'false',
+            'limit': '50',
+            'page': '1',
+            'sidx': '',
+            'sord': 'asc'
+        }
+    },
+    370200: {
+        'area': '青岛',
+        'request_url': 'https://etax.qingdao.chinatax.gov.cn:6883/newdzswj/gotoSwdjxxcx.do',
+        'captcha_url': 'https://etax.qingdao.chinatax.gov.cn:6883/newdzswj/getVCI',
+        'detail_url': 'https://etax.qingdao.chinatax.gov.cn:6883/newdzswj/swdjxxcx.do?validateCode={captcha_code}&nsrsbh={company_code}',
+        'method': 'get',
+        'type': 'json'
     },
     410000: {
         'area': '河南',
@@ -144,6 +178,20 @@ area_dict = {
             "body": {"nsrsbh": "91440600694736126C", "nsrmc": "", "captcha": ""}}}
 
     },
+    440300: {
+        'area': '深圳', # 0,极验
+        'request_url': 'https://etax.shenzhen.chinatax.gov.cn/BsfwtWeb/apps/views/sscx/fzchcx/fzchcx.html',
+        # 'captcha_url': 'https://etax.qingdao.chinatax.gov.cn:6883/newdzswj/getVCI',
+        'detail_url': 'https://etax.shenzhen.chinatax.gov.cn/api/zzzd/sssxcx/nsrxxcx',
+        'method': 'post',
+        'type': 'json',
+        'data': {
+            'pageId': '1',
+            'pageLines': '10',
+            'nsrmc': '',
+            'nsrsbh': '91440300192224550U'
+        }
+    },
     460000: {
         'area': '海南',
         'request_url': 'http://hainan.chinatax.gov.cn/bsfw_5_14/',
@@ -171,6 +219,19 @@ area_dict = {
             'pageSize': '10',
             'sortField': '',
             'sortOrder': ''
+        }
+    },
+    510000: {
+        'area': '四川',
+        'request_url': 'https://etax.sichuan.chinatax.gov.cn/yhs-web/cxzx/index.html#/nsrztcx/',
+        'captcha_url': 'https://etax.sichuan.chinatax.gov.cn/yhs-web/api/yhsyzm/get',
+        'detail_url': 'https://etax.sichuan.chinatax.gov.cn/yhs-web/api/nsrzg/query/nsrztcx',
+        'method': 'get',
+        'type': 'json',
+        'data': {
+            'nsrmc': '四川东恒德建材有限公司',
+            'shxydm': '91511302MA65QQ4L20',
+            'yzm': ''
         }
     },
     530000: {
@@ -233,72 +294,11 @@ area_dict = {
             'yzm': ''
         }
     },
-    330200: {
-        'area': '宁波',
-        'request_url': 'https://etax.ningbo.chinatax.gov.cn/yhs-web/cxzx/index.html?&code=nsrztcx&id=842#/nsrztcx',
-        'captcha_url': 'https://etax.ningbo.chinatax.gov.cn/yhs-web/api/yhsyzm/get',
-        'detail_url': 'https://etax.ningbo.chinatax.gov.cn/yhs-web/api/nsrzg/query/nsrztcx',
-        'method': 'get',
-        'type': 'json',
-        'data': {
-            'nsrmc': '宁波杉杉股份有限公司',
-            'shxydm': '91330200704803055M',
-            'yzm': ''
-        }
-    },
     650000: {
         'area': '新疆',
         'request_url': 'https://etax.xinjiang.chinatax.gov.cn/yhs-web/cxzx/index.html#/fzchcx',
         'detail_url': 'https://etax.xinjiang.chinatax.gov.cn/yhs-web/api/fzch/queryFzchxx?sfzjlxDm=103&sfzjhm={company_code}',
         'method': 'get',
         'type': 'json'
-    },
-    350200: {
-        'area': '厦门', # 0, 页面打不开
-        'request_url': 'https://etax.xiamen.chinatax.gov.cn:8443/views/nsrgl/nsrzt_query_index.jsp',
-        'detail_url': 'https://etax.xiamen.chinatax.gov.cn:8443/bsfw/nsrgl/queryNsrzt.do',
-        'method': 'post',
-        'type': 'html',
-        'data': {
-            'NSRSBH': '913502001550106684',
-            'NSRMC': '',
-            'YZM': '',
-            'saveKey': ''
-        }
-    },
-    370200: {
-        'area': '青岛',
-        'request_url': 'https://etax.qingdao.chinatax.gov.cn:6883/newdzswj/gotoSwdjxxcx.do',
-        'captcha_url': 'https://etax.qingdao.chinatax.gov.cn:6883/newdzswj/getVCI',
-        'detail_url': 'https://etax.qingdao.chinatax.gov.cn:6883/newdzswj/swdjxxcx.do?validateCode={captcha_code}&nsrsbh={company_code}',
-        'method': 'get',
-        'type': 'json'
-    },
-    440300: {
-        'area': '深圳', # 0,极验
-        'request_url': 'https://etax.shenzhen.chinatax.gov.cn/BsfwtWeb/apps/views/sscx/fzchcx/fzchcx.html',
-        # 'captcha_url': 'https://etax.qingdao.chinatax.gov.cn:6883/newdzswj/getVCI',
-        'detail_url': 'https://etax.shenzhen.chinatax.gov.cn/api/zzzd/sssxcx/nsrxxcx',
-        'method': 'post',
-        'type': 'json',
-        'data': {
-            'pageId': '1',
-            'pageLines': '10',
-            'nsrmc': '',
-            'nsrsbh': '91440300192224550U'
-        }
-    },
-    510000: {
-        'area': '四川',
-        'request_url': 'https://etax.sichuan.chinatax.gov.cn/yhs-web/cxzx/index.html#/nsrztcx/',
-        'captcha_url': 'https://etax.sichuan.chinatax.gov.cn/yhs-web/api/yhsyzm/get',
-        'detail_url': 'https://etax.sichuan.chinatax.gov.cn/yhs-web/api/nsrzg/query/nsrztcx',
-        'method': 'get',
-        'type': 'json',
-        'data': {
-            'nsrmc': '四川东恒德建材有限公司',
-            'shxydm': '91511302MA65QQ4L20',
-            'yzm': ''
-        }
     },
 }

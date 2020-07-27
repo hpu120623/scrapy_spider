@@ -12,10 +12,9 @@ class ChinataxMissNoticeSpider(Spider):
     name = 'chinatax_miss_notice'
     true = ''
     code = ''
-    test_code = 370200
+    test_code = 130000
 
     headers = {
-        # 'Content-Type': 'application/json;charset=UTF-8',
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36'
     }
 
@@ -25,7 +24,7 @@ class ChinataxMissNoticeSpider(Spider):
             if self.test_code == 110000 or self.test_code == 230000 or self.test_code == 350200 or \
                     self.test_code == 370000  or self.test_code == 450000:
                 yield FormRequest(task['detail_url'], formdata=task['data'], callback=self.parse_detail, meta={'task': task})
-            elif self.test_code == 440000 or self.test_code == 530000:
+            elif self.test_code == 440000:
                 yield Request(task['detail_url'], callback=self.parse_detail, meta={'task': task})
             else:
                 yield Request(task['request_url'], headers=self.headers, callback=self.parse_captcha, meta={'task': task})
@@ -54,31 +53,27 @@ class ChinataxMissNoticeSpider(Spider):
         with open("captcha.jpg", 'wb') as f:
             f.write(response.body)
 
-        if self.test_code == 430000:
+        if self.test_code == 130000 or self.test_code == 430000 or self.test_code == 640000:
             captcha_text = OtherOCR().parse_captcha('captcha.jpg')
         else:
             captcha_text = BaiDuOCR().parse_captcha('captcha.jpg')
         print(f'captcha_text: {captcha_text}')
 
         if task['method'] == 'get':
-            if self.test_code == 130000:
+            if self.test_code == 130000 or self.test_code == 430000:
                 task['data']['yzm'] = captcha_text
                 self.headers['Content-Type'] = 'application/json;charset=UTF-8'
                 yield Request(task['detail_url'], method='POST', body=json.dumps(task['data']), headers=self.headers,
                               meta={'task': task}, callback=self.parse_detail)
-            elif self.test_code == 520000 or self.test_code == 630000:
-                task['bw']['taxML']['body']['captcha'] = captcha_text
-                detail_url = task['detail_url'] + str(task['bw'])
-                yield Request(detail_url, callback=self.parse_detail, meta={'task': task, 'detail': 1})
             else:
                 detail_url = task['detail_url'].format(captcha_code=captcha_text)
-                yield Request(detail_url, callback=self.parse_detail, meta={'task': task, 'detail': 1})
+                yield Request(detail_url, callback=self.parse_detail, meta={'task': task})
         else:
             if self.test_code == 120000:
                 task['data']['jym'] = captcha_text
                 task['data']['token'] = token
                 self.headers['Content-Type'] = 'application/x-www-form-urlencoded'
-            elif self.test_code == 360000:
+            elif self.test_code == 360000 or self.test_code == 640000:
                 task['data']['yzm'] = captcha_text
                 self.headers['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8'
             elif self.test_code == 370200:
@@ -118,10 +113,10 @@ class ChinataxMissNoticeSpider(Spider):
                     pass
                 elif self.test_code == 440000:
                     count = len(result.get('resultObj', []))
-                elif self.test_code == 530000:
-                    count = len(result['resultObj'])
                 elif self.test_code == 450000:
                     pprint(result['data'])
+                elif self.test_code == 640000:
+                    count = len(result['data'][0].get('trs', []))
                 pprint(result)
         except Exception as e:
             count = 0
